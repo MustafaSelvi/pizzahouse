@@ -1,7 +1,7 @@
 @extends('layout.layout')
 
 @section('content')
-        <div class="flex-center position-ref full-height">
+<div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
@@ -17,10 +17,13 @@
             @endif
 
             <div class="content">
-                <img src= "/img/pizza-house.png" alt= "pizza house logo">
                 <div class="title m-b-md">
-                    The North's Best Pizza
+                   Pizza List - {{$id}}
                 </div>
+
+{{--                 @for($i = 0; $i < count($pizzas); $i++)
+                <p> {{$pizzas[$i]['type']}}</p>
+                @endfor --}}
             </div>
         </div>
 @endsection
