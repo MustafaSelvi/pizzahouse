@@ -16,7 +16,7 @@
  @yield('content')
 
     <footer>
-        Copyright 2020 Pizza House
+        Copyright 2020 TEST
     </footer>   
     </body>
     </html>

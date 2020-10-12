@@ -18,17 +18,20 @@
 
         <div class="content">
          <div class="title m-b-md">
-                   Pizza List
+                   Api Test                   
          </div>
+         <p>Order Number: {{ $response['orderNumber'] }} </p>
+         <p>Order Id: {{ $response['orderId'] }} </p>
+    {{-- }}     <p>Order Id: {{ $response->body() }} </p>
 {{--  @for($i = 0; $i < count($pizzas); $i++)
                 <p> {{$pizzas[$i]['type']}}</p>
                 @endfor --}}
-
             @foreach($pizzas as $pizza)
                  <div>
                     {{ $pizza->name}} - {{ $pizza->type}} - {{ $pizza->base}}
                 </div>
                 @endforeach
             </div>
+        
         </div>
 @endsection
