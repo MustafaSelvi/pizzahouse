@@ -5,18 +5,27 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Order;
 use Illuminate\Support\Facades\Http;
-
+use Illuminate\Support\Facades\Log;
 class OrderController extends Controller
 {
     public function index(){    
     
         $response = Http::withBasicAuth('d1e596bee2f54be990e16e8dd6ddea3e', 'f34a64bccf8d4964aefa04fa586dce83')->get('http://ssapi.shipstation.com/orders/4556932');  
-     
+        $responseArr = Http::withBasicAuth('d1e596bee2f54be990e16e8dd6ddea3e', 'f34a64bccf8d4964aefa04fa586dce83')->get('http://ssapi.shipstation.com/orders?customerName=headhoncho@whitehouse.gov&page=2&pageSize=7');
+
         $responseArray = $response->json();
-   
+        $orderData =  $response->json();
+        //$orderArr = $responseArr->json();
+        json_decode($responseArr);
+        error_log($responseArr);
+           
+       
                return view('orders/order', [
                'response' => $response,
                'responseArray' => $responseArray,
+               'orderData' => $orderData,
+               'responseArr' => $responseArr['orders'],
+               //error_log($orderArr),
                //'order' => $order
                ]);
      //   return view('orders/order');

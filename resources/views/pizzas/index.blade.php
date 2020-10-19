@@ -18,7 +18,7 @@
 
         <div class="content">
          <div class="title m-b-md">
-                   Api Test                   
+           Api Test
          </div>
          <p>Order Number: {{ $response['orderNumber'] }} </p>
          <p>Order Id: {{ $response['orderId'] }} </p>

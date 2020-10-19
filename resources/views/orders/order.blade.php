@@ -30,6 +30,7 @@
 <div class="ui grid">
     <div class="two wide computer nine wide tablet six wide mobile column">
     </div>
+
   <div class="eleven wide column" id="dashboard-monitor">
     <div class="ui segment">
 
@@ -55,7 +56,7 @@
           Create + Print Labels
         </button>
     </form>
-        <!-- table goes here --> 
+        <!-- table goes here -->      
 
         <form id="frm-example" action="/path/to/your/script.php" method="POST">
 
@@ -71,84 +72,23 @@
                   </tr>
                </thead>
                <tbody>
-                  <tr>
+
+               @foreach($responseArr as $order)
+               <tr>
                   <td>1</td>
-                     <td>{{ $response['orderNumber'] }}</td>
-                     <td>{{ $response['carrierCode'] }}</td>
-                     <td>{{ $response['customerUsername'] }}</td>
-                     <td>{{ $response['shipByDate'] }}</td>
+                     <td>{{ $order['orderNumber'] }}</td>
+                     <td>{{ $order['carrierCode'] }}</td>
+                     <td>{{ $order['billTo']['name'] }}</td>
+                     <td>{{ $order['shipByDate'] }}</td>
                      <td>
                         <button class="ui green compact labeled icon button" style="margin-left:10px;" id="new-order-button">
                            <i class="file pdf icon"></i>
                               Order Form
                            </button>
                      </td>
-                  </tr>                
-                  <tr>
-                  <td>2</td>
-                     <td>2038523490809</td>
-                     <td>USPS First Class Shipping</td>
-                     <td>Richard James</td>
-                     <td>2012/03/29</td>
-                     <td>
-                        <button class="ui green compact labeled icon button" style="margin-left:10px;" id="new-order-button">
-                           <i class="file pdf icon"></i>
-                              Order Form
-                        </button>
-                     </td>
                   </tr>
-                  <tr>
-                  <td>3</td>
-                     <td>1092134801</td>
-                     <td>USPS First Class Shipping</td>
-                     <td>Jose Rodrigues</td>
-                     <td>2011/04/25</td>
-                     <td>
-                        <button class="ui green compact labeled icon button" style="margin-left:10px;" id="new-order-button">
-                           <i class="file pdf icon"></i>
-                              Order Form
-                           </button>
-                     </td>
-                  </tr>                
-                  <tr>
-                  <td>4</td>
-                     <td>2038523490809</td>
-                     <td>USPS First Class Shipping</td>
-                     <td>Michael Schumeaher</td>
-                     <td>2012/03/29</td>
-                     <td>
-                        <button class="ui green compact labeled icon button" style="margin-left:10px;" id="new-order-button">
-                           <i class="file pdf icon"></i>
-                              Order Form
-                        </button>
-                     </td>
-                  </tr>
-                  <tr>  
-                  <td>5</td>
-                     <td>1092134801</td>
-                     <td>USPS First Class Shipping</td>
-                     <td>Naomi Watson</td>
-                     <td>2011/04/25</td>
-                     <td>
-                        <button class="ui green compact labeled icon button" style="margin-left:10px;" id="new-order-button">
-                           <i class="file pdf icon"></i>
-                              Order Form
-                           </button>
-                     </td>
-                  </tr>                
-                  <tr>
-                    <td>6</td>
-                     <td>2038523490809</td>
-                     <td>USPS First Class Shipping</td>
-                     <td>Albert Einstein</td>
-                     <td>2012/03/29</td>
-                     <td>
-                        <button class="ui green compact labeled icon button" style="margin-left:10px;" id="new-order-button">
-                           <i class="file pdf icon"></i>
-                              Order Form
-                        </button>
-                     </td>
-                  </tr>
+                  @endforeach
+
                </tbody>
                <tfoot>
                   <tr>
@@ -174,6 +114,7 @@
             <p><b>Form data as submitted to the server:</b></p>
             <pre id="example-console-form"></pre>
             
+
             </form>
 
       </div>
