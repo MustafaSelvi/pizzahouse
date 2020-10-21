@@ -40,13 +40,19 @@
                   </button>
                   </a>
 
+                  <form action="/order" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button class="ui red compact labeled icon button" style="margin-bottom:20px;" id="deleteAllSelectedRecords">
+                      <i class="minus circle icon"></i>
+                        Delete Orders
+                      </button>
+                   </form>        
+
+
         <form action="/order"  method="POST">
             @csrf
 
-        <button class="ui red compact labeled icon button" style="margin-bottom:20px;" id="new-order-button">
-        <i class="minus circle icon"></i>
-          Delete Orders
-        </button>
         <button class="ui blue compact labeled icon button" style="margin-bottom:20px;" id="new-order-button">
         <i class="minus circle icon"></i>
           Update Orders
@@ -63,7 +69,7 @@
             <table id="example" class="display" cellspacing="0" width="100%">
                <thead>
                   <tr>
-                     <th></th>
+                     <th><input type="checkbox" id="chkCheckAll"></th>
                      <th>Order ID</th>
                      <th>Service</th>
                      <th>Receipient</th>
@@ -74,8 +80,8 @@
                <tbody>
 
                @foreach($responseArr as $order)
-               <tr>
-                  <td>1</td>
+               <tr id="sid{{$order['orderId']}}">
+                 <td><input type="checkbox"  name="ids" class="checkBoxClass" value="{{ $order['orderId'] }}"></td> 
                      <td>{{ $order['orderNumber'] }}</td>
                      <td>{{ $order['carrierCode'] }}</td>
                      <td>{{ $order['billTo']['name'] }}</td>
@@ -103,9 +109,8 @@
             </table>
             
             <hr>
-            
+          
             <p>Press <b>Submit</b> and check console for URL-encoded form data that would be submitted.</p>
-            
             <p><button>Submit</button></p>
             
             <p><b>Selected rows data:</b></p>
@@ -169,6 +174,33 @@
             });   
             });
 
+      </script>
+      <script>
+        $(function (e) {
+          $("#chkCheckAll").click(function() {
+            $(".checkBoxClass").prop('checked',$(this).prop('checked'));
+          });
+          $('#deleteAllSelectedRecords').click(function(e){
+            e.preventDefault();
+            var allids = [];
+            $("input:checkbox[name=ids]:checked").each(function(){
+              allids.push($(this).val());
+            });
+            $.ajax({
+              url:"{{route('orders.deleteSelected')}}",
+              type:'DELETE',
+              data:{
+                ids:allids,
+                _token:$("input[name=_token]").val()
+              },
+              success:function(response){
+                $.each(allids,function(key,val){
+                  $('#sid'+val).remove();
+                });
+              }
+            });
+          });
+        });
       </script>
   </div>
 </div>

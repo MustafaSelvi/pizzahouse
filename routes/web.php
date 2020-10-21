@@ -26,5 +26,7 @@ Route::delete('/pizzas/{id}', 'PizzaController@destroy');
 
 Route::get('/order','OrderController@index');
 Route::post('/order','OrderController@store');
+Route::delete('/selected-orders','OrderController@delete')->name('orders.deleteSelected');
 Route::get('/new-order-form','OrderController@createOrder')->name('orders/new-order-form');
+
 

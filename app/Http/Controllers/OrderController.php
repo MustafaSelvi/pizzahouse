@@ -13,11 +13,11 @@ class OrderController extends Controller
         $response = Http::withBasicAuth('d1e596bee2f54be990e16e8dd6ddea3e', 'f34a64bccf8d4964aefa04fa586dce83')->get('http://ssapi.shipstation.com/orders/4556932');  
         $responseArr = Http::withBasicAuth('d1e596bee2f54be990e16e8dd6ddea3e', 'f34a64bccf8d4964aefa04fa586dce83')->get('http://ssapi.shipstation.com/orders?customerName=headhoncho@whitehouse.gov&page=2&pageSize=7');
 
+
         $responseArray = $response->json();
         $orderData =  $response->json();
         //$orderArr = $responseArr->json();
         json_decode($responseArr);
-        error_log($responseArr);
            
        
                return view('orders/order', [
@@ -30,6 +30,25 @@ class OrderController extends Controller
                ]);
      //   return view('orders/order');
        }
+       public function delete(Request $request) {
+
+        $ids = $request->ids;
+        $count = count($ids);
+      
+        for ($x = 0; $x < $count; $x++) {
+            error_log($ids[$x]);
+            $response = Http::withBasicAuth('d1e596bee2f54be990e16e8dd6ddea3e', 'f34a64bccf8d4964aefa04fa586dce83')->delete('http://ssapi.shipstation.com/orders/'.$ids[$x]);
+          }
+        foreach($ids as $id){
+           error_log($count);
+        $response = Http::withBasicAuth('d1e596bee2f54be990e16e8dd6ddea3e', 'f34a64bccf8d4964aefa04fa586dce83')->delete('http://ssapi.shipstation.com/orders/'.$id);
+           return response()->json(['success'=>'Orders Deleted']);
+        }
+       
+       
+        return redirect('/order');
+    
+    }
 
        public function store(Request $request){
 
@@ -71,5 +90,6 @@ class OrderController extends Controller
        public function createOrder() {
            return view('orders/new-order-form');
        }
+
 
 }
